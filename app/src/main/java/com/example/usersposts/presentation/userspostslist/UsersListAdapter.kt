@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.usersposts.R
 import com.example.usersposts.domain.model.UsersModel
+import com.example.usersposts.extensions.load
 import com.example.usersposts.presentation.userspostslist.UsersListAdapter.UserViewHolder
 import kotlinx.android.synthetic.main.list_item_user.view.img_prof_pic
 import kotlinx.android.synthetic.main.list_item_user.view.tv_profile_name
@@ -16,7 +16,6 @@ class UsersListAdapter(
     private val users: List<UsersModel>,
     private val listener: (user: UsersModel) -> Unit
 ) : RecyclerView.Adapter<UserViewHolder>() {
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -39,15 +38,11 @@ class UsersListAdapter(
             itemView.apply {
                 tv_profile_name.text = usersModel.name
                 tv_profile_posts_count.text = usersModel.posts.size.toString()
-                Glide.with(this)
-                    .load(usersModel.thumbnailUrl)
-                    .fitCenter()
-                    .into(img_prof_pic)
+                img_prof_pic.load(usersModel.thumbnailUrl, true)
                 setOnClickListener {
                     listener.invoke(usersModel)
                 }
             }
         }
-
     }
 }

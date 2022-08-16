@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.example.usersposts.R
+import com.example.usersposts.extensions.load
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_users_posts_detail.img_prof_pic
 import kotlinx.android.synthetic.main.fragment_users_posts_detail.posts_list
@@ -29,10 +29,7 @@ class UserPostsDetailFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.state.observe(viewLifecycleOwner) { user ->
             posts_list.adapter = PostListAdapter(user.posts)
-            Glide.with(this)
-                .load(user.url)
-                .fitCenter()
-                .into(img_prof_pic)
+            img_prof_pic.load(user.url, false)
         }
     }
 }
