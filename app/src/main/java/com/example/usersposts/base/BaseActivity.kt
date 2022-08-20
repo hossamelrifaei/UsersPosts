@@ -1,4 +1,4 @@
-package guardiannews.base
+package com.example.usersposts.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

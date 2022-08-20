@@ -9,14 +9,15 @@ import com.example.usersposts.common.Constants
 import com.example.usersposts.domain.model.UsersModel
 import com.example.usersposts.presentation.userpostdetail.UserPostsDetailFragment
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
 
-@ActivityRetainedScoped
-class Router @Inject internal constructor() {
+
+class RouterImpl : Router {
     private lateinit var fragmentManager: FragmentManager
 
-    fun onCreate(activity: AppCompatActivity, initialScreen: Fragment) {
+    override fun onCreate(activity: AppCompatActivity, initialScreen: Fragment) {
         init(activity.supportFragmentManager, initialScreen)
     }
 
@@ -30,11 +31,11 @@ class Router @Inject internal constructor() {
         }
     }
 
-    fun pop(): Boolean {
+    override fun pop(): Boolean {
         return fragmentManager.popBackStackImmediate()
     }
 
-    fun goToDetail(user: UsersModel) {
+    override fun goToDetail(user: UsersModel) {
         val fragment = UserPostsDetailFragment()
         fragment.arguments = bundleOf(Constants.USER_MODEL to user)
         fragmentManager
